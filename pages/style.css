@@ -1,0 +1,301 @@
+:root {
+    --black: #000000;
+    --jet: #858585;
+    --platinum: #E5E5E5;
+    --blue: #14213D;
+    --orange: #FCA311;
+    --brick: #b3492d;
+    --white: #FFFFFF;
+}
+ul {
+    list-style: none;
+}
+
+a,
+a:visited,
+a:hover {
+    
+    text-decoration: none;
+}
+
+a:focus,
+a:active {
+    outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0px;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: var(--jet);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 1400px;
+    margin: 110px auto 0;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.container {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.headerRow {
+    background-color: var(--blue);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    position: sticky;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.wrapperHeader {
+    width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logoOwl {
+    height: 80px;
+}
+
+.title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--orange);
+    line-height: 125%;
+    margin-top: 15px;
+    padding-left: 5px;   
+    letter-spacing: 0.06em;
+}
+
+.title:hover {
+    cursor: pointer;
+}
+
+.subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--white);
+    line-height: 125%;
+    letter-spacing: 0.06em;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.linkLogoHeader {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#cart {
+    color: var(--platinum);
+    font-size: 36px;
+    display: block;
+    margin-top: 20px;
+}
+
+#cart:hover .cartField {
+    background-color: var(--platinum);
+    color: var(--jet);
+    box-shadow: 0px 2px 10px 3px var(--jet);
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.cartField {
+    background-color: var(--white);
+    width: 400px;
+    height: 400px;
+    margin-top: 20px;
+    color: var(--platinum);
+    text-align: center;
+    padding-top: 30px;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    position: sticky;
+    top: 130px;
+}
+
+.cartField:hover {
+    color: var(--jet);
+    box-shadow: 0px 2px 20px 3px var(--platinum);
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+
+.card {
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.card:hover {
+    box-shadow: 0px 2px 30px 10px var(--platinum);
+    cursor: pointer;
+    transition-duration: 1s;
+}
+
+.card:hover .btnShowMore {
+    visibility: visible;
+    transition-duration: 0.3s;
+}
+
+.imgBook {
+    height: 300px;
+    margin-top: 10px;
+}
+
+.divBookRow {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.divBookHeadings {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: justify;
+    max-width: 200px;
+    height: 55px;
+    gap: 5px;
+    font-family: "Montserrat";
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: var(--jet);
+}
+
+.divBuy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.divBookPrice {
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat";
+    font-size: 15px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--blue);
+}
+
+.btn {
+    border-radius: 10px;
+    border: none;
+    display: block-flex; 
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat";
+    font-style: medium;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    
+}
+
+.card .btnShowMore {
+    visibility: hidden;
+    background-color: var(--blue);
+    width: 120px;
+    height: 30px;
+    color: var(--white);
+}
+
+
+.card .btnAdd {
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+.btn:hover {
+    background: var(--orange);
+    color: var(--black);
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.headingAuthor {
+    font-style: italic;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.backToTop {
+    background-color: var(--blue);
+    margin-top: 20px;
+    padding: 20px;
+    color: var(--white);
+    text-align: center;
+}
+
+.backToTop:hover {
+    filter: opacity(80%);
+}
+
+
+.footerRow {
+    background-color: var(--blue);
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+.spanFooter {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    margin: 30px;
+}
