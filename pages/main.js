@@ -1,5 +1,19 @@
 "use strict";
 
+// Proxy for dealing with CORS issue: https://wesbos.com/javascript/13-ajax-and-fetching-data/75-cors-and-recipes
+
+// const baseEndpoint = "http://www.recipepuppy.com/api";
+// async function fetchRecipes(query) {
+//   const res = await fetch(
+//     `https://cors-anywhere.herokuapp.com/${baseEndpoint}?q=${query}`
+//   );
+//   const data = await res.json();
+// }
+// fetchRecipes("pizza");
+
+
+
+
 const head = document.querySelector('head');
 const title = document.querySelector('title');
 title.innerHTML = 'Bookshop';
@@ -96,6 +110,99 @@ function cart() {
     const cartField = createAddClassContentAppend('div', 'cartField', fragment, 'Your cart is empty');
     main.append(fragment);
 }
+header();
+createCard(books);
+cart();
+
+
+function addModalShowMore() {
+    const fragment = document.createDocumentFragment(); 
+    const modalOuter = createAddClassContentAppend('div', 'modal-outer', fragment, '');
+    const modalInner = createAddClassContentAppend('div', 'modal-inner', modalOuter, '');
+    main.append(fragment);
+}
+
+
+function showMoreModal() {
+    
+    const buttonsShowMore = document.querySelectorAll('.btnShowMore');
+    const links = document.querySelectorAll('.link');
+
+    const modalOuter = document.querySelector('.modal-outer');
+    const modalInner = document.querySelector('.modal-inner');
+    
+    buttonsShowMore.forEach(button => button.addEventListener('click', handleCardButtonClick));
+    links.forEach(button => button.addEventListener('click', handleCardButtonClick));
+
+    function handleCardButtonClick(event) {
+        const button = event.currentTarget;
+        const card = button.closest('.card');
+        const imgSrc = card.querySelector('img').src;
+        const headingTitle = card.querySelector('.headingTitle').textContent;
+        const headingAuthor = card.querySelector('.headingAuthor').textContent;
+        const headingPrice = card.querySelector('.headingPrice').textContent;
+        
+        for (let i = 0; i < books.length; i++) {
+            if (books[i].title === headingTitle) {
+                card.dataset.description = books[i].description;
+                
+            }    
+        }
+        const desc = card.dataset.description;
+        modalInner.innerHTML = `
+  <button type="button" id="closeBtn" class="btn closeBtn">x</button>
+  <div class='modalRow'>
+    <div class='modalCol1'>
+        <img class='imgBookModal' src="${imgSrc.replace('300', '200')}" alt="${headingTitle}" />
+        
+    </div>
+    <div class='modalCol2'>
+        <h4 class='headingTitle'>${headingTitle}</h4>
+        <h4 class='headingAuthor'>${headingAuthor}</h4>
+        <h3 class='divBookPrice'>${headingPrice}</h3><br><br>
+        <h4>${desc}</h4>
+        
+    </div>
+  </div>`;
+        modalOuter.classList.add('open');
+    
+        function closeModal() {
+        modalOuter.classList.remove('open');
+    } 
+
+
+    const closeBtn = modalInner.querySelector('.closeBtn');
+    closeBtn.addEventListener('click', function () {
+        closeModal();
+    });
+        
+    
+
+    modalOuter.addEventListener('click', function (event) {
+        const isOutside = !event.target.closest('.modal-inner');
+        if (isOutside) {
+            closeModal();
+        }
+
+        
+    window.addEventListener('keydown', event => {
+        console.log(event);
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    });  
+    } 
+}
+
+addModalShowMore();
+
+showMoreModal();
+
+
+
+
 
 
 function footer() {
@@ -117,9 +224,8 @@ function footer() {
 //     main.append(...fragments);
 // }
 
-header();
-createCard(books);
-cart();
+
+
 footer();
 
 
