@@ -53,7 +53,7 @@ function header() {
     const wrapperHeader = createAddClassContentAppend('div', 'wrapperHeader', headerRow);
 
     const link = createAddClassContentAppend('a', 'linkLogoHeader', wrapperHeader);
-    link.href = "#owl";
+    link.href = "index.html";
     const logoOwl = createAddClassContentAppend('img', 'logoOwl', link);
     logoOwl.src = '../assets/icons/owl.png';
     logoOwl.alt = 'Wise Owl Bookshop';
@@ -152,12 +152,122 @@ checkValidityInputs()
 
 function cart() {
     const fragment = document.createDocumentFragment();
-    // const container = createAddClassContentAppend('div', 'container', fragment);
-
-    const cartField = createAddClassContentAppend('div', 'cartField', fragment, 'Your cart is empty');
+    const cartField = createAddClassContentAppend('div', 'cartField', fragment, '');
     cartField.id = 'cartField';
+    const list = createAddClassContentAppend('ul', 'list', cartField);
+    const total = createAddClassContentAppend('div', 'liRow', cartField);
+    const confirmOrder = createAddClassContentAppend('a', 'confirmOrderBtn', cartField, 'Confirm order');
+    confirmOrder.classList.add('btn');
+    confirmOrder.href = "form.html";
     main.append(fragment);
+
+    let items = [];
+    const buttonsAdd = document.querySelectorAll(".btnAdd");
+    // const cards = document.querySelectorAll(".card");
+    const modalInner = document.querySelector('.modal-inner');
+    console.log(buttonsAdd);
+    buttonsAdd.forEach(button => button.addEventListener('click', handleClick));
+    
+    // const closeBtn = list.querySelectorAll('closeBtn');
+    // console.log(closeBtn);
+    // const newItems = items.filter(item => item.id !== id);
+    
+    function handleClick(event) {      
+        // console.log("Submitted!!!!");  
+        const button = event.currentTarget;
+        const card = button.closest('.card');
+        const imgSrc = card.querySelector('img').src;
+        const headingTitle = card.querySelector('.headingTitle').textContent;
+        const headingAuthor = card.querySelector('.headingAuthor').textContent;
+        const headingPrice = card.querySelector('.headingPrice').textContent;
+       
+        const item = {
+            imgsrc: `${imgSrc.replace('300', '100')}`,
+            imgalt: `${headingTitle}`,
+            title: `${headingTitle}`,
+            author: `${headingAuthor}`,
+            price: `${headingPrice}`,
+            id: Date.now(),
+            complete: false
+        }
+        
+        items.push(item);
+        // console.log(`There are now ${items.length} in your state`);
+        list.dispatchEvent(new CustomEvent('itemsUpdated'));
+    }
+    // modal.addEventListener('submit', handleSubmit);
+
+    function displayItems() {
+        console.log(items);
+        const html = items
+            .map(
+                (item) => `<li class='liRow'>
+                <img class='imgBookCart' src="${item.imgsrc}" alt="${item.title}" />
+                <span class='headingCart'><h4 class='headingTitle'>${item.title}</h4>
+                <h4 class='headingAuthor'>${item.author}</h4></span>    
+                <h3 class='divBookPrice'>${item.price}</h3>
+                <button type="button" aria-label="Remove ${item.title}" value="${item.id}" id="closeBtn" class="btn closeBtn">x</button></li>`                       
+            )
+            .join('');
+        list.innerHTML = html;
+    }
+
+    function displayTotal() {
+        console.log(items);
+        let prices = items.map((item) => parseInt(item.price));
+        let totalPrice = prices.reduce(
+  (previousValue, currentValue) => previousValue + currentValue,
+            0);
+        // list.dispatchEvent(new CustomEvent('itemsUpdated'));
+        
+                const html = `<h4 class='divBookPrice'>Total</h4>
+                <h3 class='divBookPrice'>${totalPrice}$</h3>`;
+        total.innerHTML = html;
+        
+            // total.visibility = 'hidden';
+            // confirmOrder.visibility = 'hidden';
+        
+    }
+
+    function mirrorToLocalStorage() {
+        localStorage.setItem('items', JSON.stringify(items));
+        console.info('Saving items to localstorage');
+    }
+
+    function restoreFromLocalStorage() {
+        console.log('Restoring from localstorage');
+        const lsItems = JSON.parse(localStorage.getItem("items"));
+
+        if (lsItems.length) {
+            items.push(...lsItems);
+            list.dispatchEvent(new CustomEvent('itemsUpdated'));
+        }
+        
+    }
+
+    function deleteItem(id) {
+        // console.log("DELETING ITEM!!!", id);
+        items = items.filter((item) => item.id !== id);
+        list.dispatchEvent(new CustomEvent('itemsUpdated'));
+    }
+
+    
+    list.addEventListener('click', function(e) {
+        // console.log(e.target, e.currentTarget);
+        if (e.target.matches("button")) {
+            deleteItem(parseInt(e.target.value));
+        }
+    });
+
+    list.addEventListener('itemsUpdated', displayItems);
+    list.addEventListener('itemsUpdated', displayTotal);
+    list.addEventListener("itemsUpdated", mirrorToLocalStorage);
+    restoreFromLocalStorage();
 }
+
+
+
+
 
 header();
 
@@ -166,7 +276,7 @@ cart();
 
 function summarizeOrder() {
     const submit = document.getElementById('submitBtn');
-    // let cartFieldContent = document.getElementById('cartField').textContent;
+    let cartField = document.getElementById('cartField');
     const street = document.getElementById('street');
     const name = document.getElementById('name');
     const surname = document.getElementById('surname');
@@ -177,10 +287,10 @@ function summarizeOrder() {
     submit.addEventListener("click", (event) => {
         event.preventDefault();
         document.getElementById('cartField').innerHTML = `
-            The order created.<br>
+            <h2>The order created.<br>
             The delivery address is ${street.value} street, house ${house.value}, flat ${flat.value}.<br> 
             Customer ${name.value} ${surname.value}.<br>
-            Delivery date - ${deliveryDate.value}.`
+            Delivery date - ${deliveryDate.value}.</h2>`
     }
     );
 }
@@ -192,7 +302,7 @@ function footer() {
     const footer = createAddClassContentAppend('footer', 'footer', fragment);
     footer.id = 'footer';
     const backToTop = createAddClassContentAppend('a', 'backToTop', footer, 'Back to top')
-    backToTop.href = "#header";
+    backToTop.href = "#owl";
     const footerRow = createAddClassContentAppend('div', 'footerRow', footer);
     // const container = createAddClassContentAppend('div', 'container', footerRow);
     const spanFooter = createAddClassContentAppend('span', 'spanFooter', footerRow, '© 2022, WiseOwlBookshop.com, Inc. or its affiliates')

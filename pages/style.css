@@ -138,27 +138,78 @@ body {
 
 .cartField {
     background-color: var(--white);
-    width: 400px;
-    height: 400px;
-    margin-top: 20px;
-    color: var(--platinum);
+    width: 350px;
+    height: 420px;
+    color: var(--jet);
     text-align: center;
-    padding-top: 30px;
-    font-size: 24px;
+    padding: 20px;
+    font-size: 12px;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.06em;
     position: sticky;
     top: 130px;
-    /* right: 0px;    */
+    /* right: 0px; */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
 }
 
 .cartField:hover {
     color: var(--jet);
     box-shadow: 0px 2px 20px 3px var(--platinum);
-    cursor: pointer;
+    /* cursor: pointer; */
     transition-duration: 0.3s;
 }
+
+.cartField ul {
+    padding:0;
+}
+
+.cartField h2 {
+    text-align: justify;
+    font-size: 15px;
+    line-height: 200%;
+}
+
+.imgBookCart {
+    width: 70px;
+}
+
+.headingCart {
+    width: 170px;
+    /* padding: 10px; */
+}
+
+.confirmOrderBtn {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 12px 0;
+    margin: 20px 0 0 0;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.list {
+    height: 300px;
+    width: 360px;
+    overflow:auto;
+}
+
+.liRow {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    align-content: space-between;
+    text-align:justify;
+    gap: 13px;
+}
+
+
 
 
 .card {
@@ -220,7 +271,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Montserrat";
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     font-style: italic;
     color: var(--blue);
@@ -357,7 +408,7 @@ label {
 }
 
 
-button[type=submit] {
+#submitBtn {
     background-color: var(--blue);
     color: var(--white);
     padding: 12px;
@@ -369,7 +420,7 @@ button[type=submit] {
     font-size: 17px;
 }
 
-button[type=submit]:disabled {
+#submitBtn:disabled {
     background-color: var(--jet);
     color: var(--white);
     opacity: 80%;
@@ -573,7 +624,7 @@ textarea:focus {
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    /* transition: opacity 0.3s; */
 }
 
 .modal-inner {
@@ -582,9 +633,9 @@ textarea:focus {
     padding: 2rem;
     border-radius: 10px;
     min-height: 200px;
-    background: white;
-    transform: translateY(10%);
-    transition: transform 1s;
+    background: var(--white);
+    /* transform: translateY(10%);
+    transition: transform 1s; */
     
 }
 
@@ -595,9 +646,9 @@ textarea:focus {
     
 }
 
-.modal-outer.open .modal-inner {
+/* .modal-outer.open .modal-inner {
     transform: translateY(0);
-}
+} */
 
 
 .modalRow {

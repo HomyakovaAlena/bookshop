@@ -12,13 +12,10 @@
 // fetchRecipes("pizza");
 
 
-
-
 const head = document.querySelector('head');
 const title = document.querySelector('title');
 title.innerHTML = 'Bookshop';
 const main = document.querySelector('.wrapper');
-
 
 function addStylesFontsIcons() {
     const fragment = document.createDocumentFragment();
@@ -98,6 +95,7 @@ function createCard(books) {
         const divBookPrice = createAddClassContentAppend('div', 'divBookPrice', divBuy);
         const headingPrice = createAddClassContentAppend('h3', 'headingPrice', divBookPrice, books[i].price + '$');
         const buttonAdd = createAddClassContentAppend('button', 'btnAdd', divBuy, '+');
+        // buttonAdd.type = 'submit';
         buttonAdd.classList.add('btn');
         const buttonShowMore = createAddClassContentAppend('button', 'btnShowMore', card, 'Show more');
         buttonShowMore.classList.add('btn');
@@ -107,12 +105,125 @@ function createCard(books) {
 
 function cart() {
     const fragment = document.createDocumentFragment();
-    const cartField = createAddClassContentAppend('div', 'cartField', fragment, 'Your cart is empty');
+    const cartField = createAddClassContentAppend('div', 'cartField', fragment, '');
+    cartField.id = 'cartField';
+    const list = createAddClassContentAppend('ul', 'list', cartField);
+    const total = createAddClassContentAppend('div', 'liRow', cartField);
+    const confirmOrder = createAddClassContentAppend('a', 'confirmOrderBtn', cartField, 'Confirm order');
+    confirmOrder.classList.add('btn');
+    confirmOrder.href = "form.html";
     main.append(fragment);
+
+    let items = [];
+    const buttonsAdd = document.querySelectorAll(".btnAdd");
+    // const cards = document.querySelectorAll(".card");
+    const modalInner = document.querySelector('.modal-inner');
+    console.log(buttonsAdd);
+    buttonsAdd.forEach(button => button.addEventListener('click', handleClick));
+    
+    // const closeBtn = list.querySelectorAll('closeBtn');
+    // console.log(closeBtn);
+    // const newItems = items.filter(item => item.id !== id);
+    
+    function handleClick(event) {      
+        // console.log("Submitted!!!!");  
+        const button = event.currentTarget;
+        const card = button.closest('.card');
+        const imgSrc = card.querySelector('img').src;
+        const headingTitle = card.querySelector('.headingTitle').textContent;
+        const headingAuthor = card.querySelector('.headingAuthor').textContent;
+        const headingPrice = card.querySelector('.headingPrice').textContent;
+       
+        const item = {
+            imgsrc: `${imgSrc.replace('300', '100')}`,
+            imgalt: `${headingTitle}`,
+            title: `${headingTitle}`,
+            author: `${headingAuthor}`,
+            price: `${headingPrice}`,
+            id: Date.now(),
+            complete: false
+        }
+        
+        items.push(item);
+        // console.log(`There are now ${items.length} in your state`);
+        list.dispatchEvent(new CustomEvent('itemsUpdated'));
+    }
+    // modal.addEventListener('submit', handleSubmit);
+
+    function displayItems() {
+        console.log(items);
+        const html = items
+            .map(
+                (item) => `<li class='liRow'>
+                <img class='imgBookCart' src="${item.imgsrc}" alt="${item.title}" />
+                <span class='headingCart'><h4 class='headingTitle'>${item.title}</h4>
+                <h4 class='headingAuthor'>${item.author}</h4></span>    
+                <h3 class='divBookPrice'>${item.price}</h3>
+                <button type="button" aria-label="Remove ${item.title}" value="${item.id}" id="closeBtn" class="btn closeBtn">x</button></li>`                       
+            )
+            .join('');
+        list.innerHTML = html;
+    }
+
+    function displayTotal() {
+        console.log(items);
+        let prices = items.map((item) => parseInt(item.price));
+        let totalPrice = prices.reduce(
+  (previousValue, currentValue) => previousValue + currentValue,
+            0);
+        // list.dispatchEvent(new CustomEvent('itemsUpdated'));
+        
+                const html = `<h4 class='divBookPrice'>Total</h4>
+                <h3 class='divBookPrice'>${totalPrice}$</h3>`;
+        total.innerHTML = html;
+        
+            // total.visibility = 'hidden';
+            // confirmOrder.visibility = 'hidden';
+        
+    }
+
+    function mirrorToLocalStorage() {
+        localStorage.setItem('items', JSON.stringify(items));
+        console.info('Saving items to localstorage');
+    }
+
+    function restoreFromLocalStorage() {
+        console.log('Restoring from localstorage');
+        const lsItems = JSON.parse(localStorage.getItem("items"));
+
+        if (lsItems.length) {
+            items.push(...lsItems);
+            list.dispatchEvent(new CustomEvent('itemsUpdated'));
+        }
+        
+    }
+
+    function deleteItem(id) {
+        // console.log("DELETING ITEM!!!", id);
+        items = items.filter((item) => item.id !== id);
+        list.dispatchEvent(new CustomEvent('itemsUpdated'));
+    }
+
+    
+    list.addEventListener('click', function(e) {
+        // console.log(e.target, e.currentTarget);
+        if (e.target.matches("button")) {
+            deleteItem(parseInt(e.target.value));
+        }
+    });
+
+    list.addEventListener('itemsUpdated', displayItems);
+    list.addEventListener('itemsUpdated', displayTotal);
+    list.addEventListener("itemsUpdated", mirrorToLocalStorage);
+    restoreFromLocalStorage();
 }
+
+
+
 header();
 createCard(books);
 cart();
+
 
 
 function addModalShowMore() {
@@ -125,6 +236,7 @@ function addModalShowMore() {
 
 function showMoreModal() {
     
+    const buttonsAdd = document.querySelectorAll('.btnAdd');
     const buttonsShowMore = document.querySelectorAll('.btnShowMore');
     const links = document.querySelectorAll('.link');
 
@@ -132,36 +244,38 @@ function showMoreModal() {
     const modalInner = document.querySelector('.modal-inner');
     
     buttonsShowMore.forEach(button => button.addEventListener('click', handleCardButtonClick));
-    links.forEach(button => button.addEventListener('click', handleCardButtonClick));
+    // links.forEach(button => button.addEventListener('click', handleCardButtonClick));
+    
+    links.forEach(link => link.addEventListener('click', (event) => {
+        if (!(event.target.matches("button"))) handleCardButtonClick
+    }));
+            
 
     function handleCardButtonClick(event) {
+        // console.log(event.target, event.currentTarget);
         const button = event.currentTarget;
+        // console.log(event.target);
         const card = button.closest('.card');
         const imgSrc = card.querySelector('img').src;
         const headingTitle = card.querySelector('.headingTitle').textContent;
         const headingAuthor = card.querySelector('.headingAuthor').textContent;
         const headingPrice = card.querySelector('.headingPrice').textContent;
-        
-        for (let i = 0; i < books.length; i++) {
-            if (books[i].title === headingTitle) {
-                card.dataset.description = books[i].description;
-                
-            }    
-        }
+
+        const book = books.filter(item => item.title === headingTitle);
+        card.dataset.description = book[0].description;
         const desc = card.dataset.description;
         modalInner.innerHTML = `
   <button type="button" id="closeBtn" class="btn closeBtn">x</button>
   <div class='modalRow'>
     <div class='modalCol1'>
         <img class='imgBookModal' src="${imgSrc.replace('300', '200')}" alt="${headingTitle}" />
-        
     </div>
     <div class='modalCol2'>
         <h4 class='headingTitle'>${headingTitle}</h4>
         <h4 class='headingAuthor'>${headingAuthor}</h4>
         <h3 class='divBookPrice'>${headingPrice}</h3><br><br>
         <h4>${desc}</h4>
-        
+        <button class='btnAdd btn'>+</button>
     </div>
   </div>`;
         modalOuter.classList.add('open');
@@ -170,7 +284,7 @@ function showMoreModal() {
         modalOuter.classList.remove('open');
     } 
 
-
+ 
     const closeBtn = modalInner.querySelector('.closeBtn');
     closeBtn.addEventListener('click', function () {
         closeModal();
@@ -201,16 +315,12 @@ addModalShowMore();
 showMoreModal();
 
 
-
-
-
-
 function footer() {
     const fragment = document.createDocumentFragment();
     const footer = createAddClassContentAppend('footer', 'footer', fragment);
     footer.id = 'footer';
     const backToTop = createAddClassContentAppend('a', 'backToTop', footer, 'Back to top')
-    backToTop.href = "#header";
+    backToTop.href = "#owl";
     const footerRow = createAddClassContentAppend('div', 'footerRow', footer);
     // const container = createAddClassContentAppend('div', 'container', footerRow);
     const spanFooter = createAddClassContentAppend('span', 'spanFooter', footerRow, '© 2022, WiseOwlBookshop.com, Inc. or its affiliates')
