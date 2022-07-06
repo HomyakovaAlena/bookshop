@@ -1,9 +1,9 @@
-import { create, main } from './aggregate.js'
+import { create, main } from "./aggregate.js";
 
 function createCard(books) {
   const fragment = document.createDocumentFragment();
   const container = create("div", "container", fragment);
-  
+
   for (let i = 0; i < books.length; i++) {
     const card = create("div", "card", container);
     const link = create("a", "link", card);
@@ -13,11 +13,7 @@ function createCard(books) {
     img.alt = books[i].title;
     img.draggable = true;
     const divBookRow = create("div", "divBookRow", figure);
-    const divBookHeadings = create(
-      "div",
-      "divBookHeadings",
-      divBookRow
-    );
+    const divBookHeadings = create("div", "divBookHeadings", divBookRow);
     const headingTitle = create(
       "h4",
       "headingTitle",
@@ -32,30 +28,16 @@ function createCard(books) {
     );
     const divBuy = create("div", "divBuy", divBookRow);
 
-    const divBookPrice = create(
-      "div",
-      "divBookPrice",
-      divBuy
-    );
+    const divBookPrice = create("div", "divBookPrice", divBuy);
     const headingPrice = create(
       "h3",
       "headingPrice",
       divBookPrice,
       books[i].price + "$"
     );
-    const buttonAdd = create(
-      "button",
-      "btnAdd",
-      divBuy,
-      "+"
-    );
+    const buttonAdd = create("button", "btnAdd", divBuy, "+");
     buttonAdd.classList.add("btn");
-    const buttonShowMore = create(
-      "button",
-      "btnShowMore",
-      card,
-      "Show more"
-    );
+    const buttonShowMore = create("button", "btnShowMore", card, "Show more");
     buttonShowMore.classList.add("btn");
   }
   main.append(fragment);
