@@ -1,1 +1,1 @@
-[https://HomyakovaAlena.github.io/bookshop/](https://HomyakovaAlena.github.io/bookshop/)
+[https://HomyakovaAlena.github.io/bookshop/pages/](https://HomyakovaAlena.github.io/bookshop/pages/)
