@@ -1,8 +1,8 @@
 :root {
   --black: #000000;
   --jet: #858585;
-  --platinum: #e5e5e5;
-  --blue: #14213d;
+  --lightSea: #1a5d5442;
+  --sea: #1a5d54;
   --orange: #fca311;
   --brick: #b3492d;
   --white: #ffffff;
@@ -63,7 +63,7 @@ body {
 }
 
 .headerRow {
-  background-color: var(--blue);
+  background-color: var(--sea);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,21 +119,6 @@ body {
   flex-direction: row;
 }
 
-#cart {
-  color: var(--platinum);
-  font-size: 36px;
-  display: block;
-  margin-top: 20px;
-}
-
-#cart:hover .cartField {
-  background-color: var(--platinum);
-  color: var(--jet);
-  box-shadow: 0px 2px 10px 3px var(--jet);
-  cursor: pointer;
-  transition-duration: 0.3s;
-}
-
 .cartField {
   background-color: var(--white);
   width: 350px;
@@ -146,8 +131,7 @@ body {
   font-style: normal;
   letter-spacing: 0.06em;
   position: sticky;
-  top: 130px;
-  /* right: 0px; */
+  top: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,13 +139,12 @@ body {
 }
 
 .active {
-  background-color: var(--platinum);
+  background-color: var(--lightSea);
 }
 
 .cartField:hover {
   color: var(--jet);
-  box-shadow: 0px 2px 20px 3px var(--platinum);
-  /* cursor: pointer; */
+  box-shadow: 0px 2px 20px 3px var(--lightSea);
   transition-duration: 0.3s;
 }
 
@@ -181,11 +164,10 @@ body {
 
 .headingCart {
   width: 170px;
-  /* padding: 10px; */
 }
 
 .confirmOrderBtn {
-  background-color: var(--blue);
+  background-color: var(--sea);
   color: var(--white);
   padding: 12px 0;
   margin: 20px 0 0 0;
@@ -216,6 +198,7 @@ body {
   align-content: space-between;
   text-align: justify;
   gap: 13px;
+  margin-bottom: 5px;
 }
 
 .card {
@@ -233,7 +216,7 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0px 2px 30px 10px var(--platinum);
+  box-shadow: 0px 2px 30px 10px var(--lightSea);
   cursor: pointer;
   transition-duration: 1s;
 }
@@ -286,7 +269,7 @@ body {
   font-size: 14px;
   font-weight: 600;
   font-style: italic;
-  color: var(--blue);
+  color: var(--sea);
 }
 
 .btn {
@@ -304,7 +287,7 @@ body {
 
 .card .btnShowMore {
   visibility: hidden;
-  background-color: var(--blue);
+  background-color: var(--sea);
   width: 120px;
   height: 30px;
   color: var(--white);
@@ -314,10 +297,10 @@ body {
   width: 30px;
   height: 30px;
   color: var(--white);
-  background-color: var(--blue);
+  background-color: var(--sea);
 }
 
-.btn:hover(not :disabled) {
+.btn:hover {
   background: var(--orange);
   color: var(--black);
   cursor: pointer;
@@ -335,7 +318,7 @@ body {
 }
 
 .backToTop {
-  background-color: var(--blue);
+  background-color: var(--sea);
   margin-top: 20px;
   padding: 20px;
   color: var(--white);
@@ -347,7 +330,7 @@ body {
 }
 
 .footerRow {
-  background-color: var(--blue);
+  background-color: var(--sea);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -367,13 +350,10 @@ body {
   flex-direction: column;
   padding: 1em;
   border-radius: 10px;
-  background-color: var(--platinum);
+  background-color: var(--lightSea);
   padding: 20px;
-  /* border: 1px solid var(--blue); */
   color: var(--black);
   font-size: 13px;
-  /* position: sticky; */
-  /* top: 130px; */
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -416,7 +396,7 @@ label {
 }
 
 #submitBtn {
-  background-color: var(--blue);
+  background-color: var(--sea);
   color: var(--white);
   padding: 12px;
   margin: 5px 0;
@@ -483,7 +463,6 @@ textarea:focus {
   padding-left: 5px;
 }
 
-/* The container */
 .contain {
   display: block;
   position: relative;
@@ -491,12 +470,10 @@ textarea:focus {
   margin-top: 5px;
   margin-bottom: 15px;
   cursor: pointer;
-  /* font-size: 14px; */
   user-select: none;
   line-height: 160%;
 }
 
-/* Hide the browser's default checkbox */
 .contain input {
   position: absolute;
   opacity: 0;
@@ -505,7 +482,6 @@ textarea:focus {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -515,24 +491,20 @@ textarea:focus {
   background-color: var(--white);
 }
 
-/* On mouse-over, add a grey background color */
 .contain:hover input ~ .checkmark {
   background-color: var(--jet);
 }
 
-/* When the checkbox is checked, add a blue background */
 .contain input:checked ~ .checkmark {
   background-color: var(--orange);
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
-  /* position: absolute; */
   display: none;
 }
 
-/* Show the checkmark when checked */
+
 .contain input:checked ~ .checkmark:after {
   display: block;
 }
@@ -554,7 +526,6 @@ textarea:focus {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  /* font-size: 22px; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -562,14 +533,12 @@ textarea:focus {
   line-height: 160%;
 }
 
-/* Hide the browser's default checkbox */
 .contain1 input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-/* Create a custom radio button */
 .checkmarkradio {
   position: absolute;
   top: 0;
@@ -580,29 +549,24 @@ textarea:focus {
   border-radius: 50%;
 }
 
-/* On mouse-over, add a grey background color */
 .contain1:hover input ~ .checkmarkradio {
   background-color: var(--jet);
 }
 
-/* When the radio button is checked, add a blue background */
 .contain1 input:checked ~ .checkmarkradio {
   background-color: var(--orange);
 }
 
-/* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmarkradio:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the indicator (dot/circle) when checked */
 .contain1 input:checked ~ .checkmarkradio:after {
   display: block;
 }
 
-/* Style the indicator (dot/circle) */
 .contain1 .checkmarkradio:after {
   top: 8px;
   left: 8px;
@@ -624,7 +588,6 @@ textarea:focus {
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  /* transition: opacity 0.3s; */
 }
 
 .modal-inner {
@@ -634,18 +597,12 @@ textarea:focus {
   border-radius: 10px;
   min-height: 200px;
   background: var(--white);
-  /* transform: translateY(10%);
-    transition: transform 1s; */
 }
 
 .modal-outer.open {
   opacity: 1;
   pointer-events: all;
 }
-
-/* .modal-outer.open .modal-inner {
-    transform: translateY(0);
-} */
 
 .modalRow {
   display: flex;

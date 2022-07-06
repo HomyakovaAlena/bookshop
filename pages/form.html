@@ -1,141 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order confirmation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/2f094e08d7.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/2f094e08d7.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
+  <body>
     <main class="wrapper" id="wrapper">
-    
-        <form class="form" id="form">
-            <div class="form-row">
-            <div class="column col1">
-
-            
+      <form class="form" id="form">
+        <div class="form-row">
+          <div class="column col1">
             <fieldset class="fieldset">
-                <legend>Contact information</legend>
-                
-                <div>
-                    <label for="name" class= 'name'>
-                        <i class="fa fa-user"></i>
-                        <span>Name: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" id="name" name="name" required minlength="4" pattern="[A-Za-zА-Яа-я]+" placeholder="Jack">
-                    <span class="validity"></span>
-                </div>
-                <div>
-                    <label for="surname" class= 'surname'>
-                        <i class="fa-regular fa-id-badge"></i>
-                        <span>Surname: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" id="surname" name="surname" required minlength="5" pattern="[A-Za-zА-Яа-я]+" placeholder="Smith">
-                    <span class="validity"></span>
-                </div>        
+              <legend>Contact information</legend>
+
+              <div>
+                <label for="name" class="name">
+                  <i class="fa fa-user"></i>
+                  <span>Name: </span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  minlength="4"
+                  pattern="[A-Za-zА-Яа-я]+"
+                  placeholder="Jack"
+                />
+                <span class="validity"></span>
+              </div>
+              <div>
+                <label for="surname" class="surname">
+                  <i class="fa-regular fa-id-badge"></i>
+                  <span>Surname: </span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  required
+                  minlength="5"
+                  pattern="[A-Za-zА-Яа-я]+"
+                  placeholder="Smith"
+                />
+                <span class="validity"></span>
+              </div>
             </fieldset>
 
             <fieldset class="fieldset">
-                <legend>Delivery information</legend>
-                <div>
-                    <label for="datefield" class="deliveryDate">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <span>Delivery date:</span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="date" id="dateField" required>
-                    <span class="validity"></span>
-                </div>
-                <div>
-                    <label for="street" class='street'>
-                        <i class="fa-solid fa-map"></i>
-                        <span>Street: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" id="street" name="street" required minlength="5" pattern="[A-Za-zА-Яа-я0-9 ]+" placeholder="Baker">
-                    <span class="validity"></span>
-                </div>
-                <div>
-                    <label for="house" class='house'>
-                        <i class="fa-solid fa-city"></i>
-                        <span>House number: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" inputmode="numeric" pattern="[0-9]+" id="house" name="house" required min="1" placeholder="221">
-                    <span class="validity"></span>
-                </div>
-                <div>
-                    <label for="flat" class='flat'>
-                        <i class="fa-solid fa-building-user"></i>
-                        <span>Flat number: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" inputmode="numeric" pattern="([1-9]|[1-9][0-9-\/]+)" id="flat" name="flat" required min="1" placeholder="1/2">
-                    <span class="validity"></span>
-                </div>
+              <legend>Delivery information</legend>
+              <div>
+                <label for="datefield" class="deliveryDate">
+                  <i class="fa-solid fa-calendar-days"></i>
+                  <span>Delivery date:</span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="date" id="dateField" required />
+                <span class="validity"></span>
+              </div>
+              <div>
+                <label for="street" class="street">
+                  <i class="fa-solid fa-map"></i>
+                  <span>Street: </span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input
+                  type="text"
+                  id="street"
+                  name="street"
+                  required
+                  minlength="5"
+                  pattern="[A-Za-zА-Яа-я0-9 ]+"
+                  placeholder="Baker"
+                />
+                <span class="validity"></span>
+              </div>
+              <div>
+                <label for="house" class="house">
+                  <i class="fa-solid fa-city"></i>
+                  <span>House number: </span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  pattern="[0-9]+"
+                  id="house"
+                  name="house"
+                  required
+                  min="1"
+                  placeholder="221"
+                />
+                <span class="validity"></span>
+              </div>
+              <div>
+                <label for="flat" class="flat">
+                  <i class="fa-solid fa-building-user"></i>
+                  <span>Flat number: </span>
+                  <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  pattern="([1-9]|[1-9][0-9-\/]+)"
+                  id="flat"
+                  name="flat"
+                  required
+                  min="1"
+                  placeholder="1/2"
+                />
+                <span class="validity"></span>
+              </div>
             </fieldset>
-            
-            </div>
+          </div>
 
-            <div class="column col2">
+          <div class="column col2">
             <fieldset class="fieldset">
-            
-                <legend><i class="fa-solid fa-gift"></i>Choose 2 gifts:</legend>
-                <label for="pack" class="contain">Pack as a gift
-                <input type="checkbox" class="single-checkbox" id="pack" name="gift" value="pack">
+              <legend><i class="fa-solid fa-gift"></i>Choose 2 gifts:</legend>
+              <label for="pack" class="contain"
+                >Pack as a gift
+                <input
+                  type="checkbox"
+                  class="single-checkbox"
+                  id="pack"
+                  name="gift"
+                  value="pack"
+                />
                 <span class="checkmark"></span>
-                </label>
-                <label for="postcard" class="contain">Add postcard
-                <input type="checkbox" class="single-checkbox" id="postcard" name="gift" value="postcard">
+              </label>
+              <label for="postcard" class="contain"
+                >Add postcard
+                <input
+                  type="checkbox"
+                  class="single-checkbox"
+                  id="postcard"
+                  name="gift"
+                  value="postcard"
+                />
                 <span class="checkmark"></span>
-                </label>
-                <label for="discount" class="contain">Provide 2% discount to the next time
-                <input type="checkbox" class="single-checkbox" id="discount" name="gift" value="discount">
+              </label>
+              <label for="discount" class="contain"
+                >Provide 2% discount to the next time
+                <input
+                  type="checkbox"
+                  class="single-checkbox"
+                  id="discount"
+                  name="gift"
+                  value="discount"
+                />
                 <span class="checkmark"></span>
-                </label>
-                <label for="pen" class="contain">Branded pen
-                <input type="checkbox" class="single-checkbox" id="pen" name="gift" value="pen">
+              </label>
+              <label for="pen" class="contain"
+                >Branded pen
+                <input
+                  type="checkbox"
+                  class="single-checkbox"
+                  id="pen"
+                  name="gift"
+                  value="pen"
+                />
                 <span class="checkmark"></span>
-                </label>
+              </label>
             </fieldset>
-            
-            
-            
+
             <fieldset class="fieldset">
-                <legend><i class="fa-solid fa-money-bills"></i>Choose the payment type: <strong><abbr title="required">*</abbr></strong></legend>
-                <label for="bycash" class="contain1">Cash
-                <input type="radio" id="bycash" name="payment" value="cash" checked required>
+              <legend>
+                <i class="fa-solid fa-money-bills"></i>Choose the payment type:
+                <strong><abbr title="required">*</abbr></strong>
+              </legend>
+              <label for="bycash" class="contain1"
+                >Cash
+                <input
+                  type="radio"
+                  id="bycash"
+                  name="payment"
+                  value="cash"
+                  checked
+                  required
+                />
                 <span class="checkmarkradio"></span>
-                </label>
-                <label for="bycard" class="contain1">Card
-                <input type="radio" id="bycard" name="payment" value="card" required>
+              </label>
+              <label for="bycard" class="contain1"
+                >Card
+                <input
+                  type="radio"
+                  id="bycard"
+                  name="payment"
+                  value="card"
+                  required
+                />
                 <span class="checkmarkradio"></span>
-                </label>
+              </label>
             </fieldset>
-      
-            
-            </div>
-            </div>
-            <section>
-                <div>
-                    <button type="submit" id="submitBtn" class="btn">Complete</button>
-                </div>
-            </section>
-        </form>
+          </div>
+        </div>
+        <section>
+          <div>
+            <button type="submit" id="submitBtn" class="btn">Complete</button>
+          </div>
+        </section>
+      </form>
     </main>
-        
-    <!-- <script type="module" src="main.js"></script> -->
-    <script type="text/javascript" src="data.js"></script>
-    <script type="text/javascript" src="form.js"></script>
 
-
-
-</body>
-
+    <script type="module" src="index.js"></script>
+  </body>
 </html>
