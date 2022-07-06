@@ -505,7 +505,6 @@ textarea:focus {
   display: none;
 }
 
-
 .contain input:checked ~ .checkmark:after {
   display: block;
 }

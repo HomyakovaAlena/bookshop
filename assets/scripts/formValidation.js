@@ -90,8 +90,6 @@ function summarizeOrder() {
             Delivery date - ${deliveryDate.value}.</h2>`;
     localStorage.setItem("items", JSON.stringify([]));
   });
-
-  
 }
 
 export {
