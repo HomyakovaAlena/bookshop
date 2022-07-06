@@ -1,3 +1,5 @@
+import { pushItem } from "./aggregate.js";
+
 function dragAndDrop() {
   let dragObj = "";
   const dragImgs = document.querySelectorAll(".imgBook");
@@ -45,24 +47,7 @@ function dragAndDrop() {
       cartField.classList.remove("active");
       return false
     }
-    const card = dragObj.closest(".card");
-    const imgSrc = card.querySelector("img").src;
-    const headingTitle = card.querySelector(".headingTitle").textContent;
-    const headingAuthor = card.querySelector(".headingAuthor").textContent;
-    const headingPrice = card.querySelector(".headingPrice").textContent;
-
-    const item = {
-      imgsrc: `${imgSrc.replace("300", "100")}`,
-      imgalt: `${headingTitle}`,
-      title: `${headingTitle}`,
-      author: `${headingAuthor}`,
-      price: `${headingPrice}`,
-      // id: Date.now(),
-      complete: false,
-    };
-    let items = JSON.parse(localStorage.getItem("items"));
-    items.push(item);
-    list.dispatchEvent(new CustomEvent("itemsUpdated", { "detail": items }));
+    pushItem(dragObj);
     dragObj = "";
     cartField.classList.remove("active");
   }

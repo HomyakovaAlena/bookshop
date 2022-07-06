@@ -2,7 +2,7 @@
 export { create } from './create.js';
 export { header } from './header.js';
 export { createCard } from './createCard.js';
-export { cart, deleteItem, restoreFromLocalStorage,  mirrorToLocalStorage, displayItems, displayTotal, addToCart } from './cart.js';
+export { cart, deleteItem, restoreFromLocalStorage,  mirrorToLocalStorage, displayItems, displayTotal, addToCart, pushItem } from './cart.js';
 export { addStyles } from './addStyles.js';
 export { addModalShowMore, showMoreModal } from './modal.js';
 export { dragAndDrop } from './dragAndDrop.js';

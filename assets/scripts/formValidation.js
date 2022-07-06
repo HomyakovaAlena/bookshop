@@ -88,7 +88,10 @@ function summarizeOrder() {
             The delivery address is ${street.value} street, house ${house.value}, flat ${flat.value}.<br> 
             Customer ${name.value} ${surname.value}.<br>
             Delivery date - ${deliveryDate.value}.</h2>`;
+    localStorage.setItem("items", JSON.stringify([]));
   });
+
+  
 }
 
 export {

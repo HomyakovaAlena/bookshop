@@ -2,14 +2,20 @@ import {
   addStyles,
   header,
   createCard,
-  cart, addToCart,
+  cart,
+  addToCart,
   addModalShowMore,
   showMoreModal,
   dragAndDrop,
-  footer, checkDate, validateCheckbox, changeSubmitBtn, checkValidityInputs, summarizeOrder,
+  footer,
+  checkDate,
+  validateCheckbox,
+  changeSubmitBtn,
+  checkValidityInputs,
+  summarizeOrder,
 } from "../assets/scripts/aggregate.js";
 
-fetch("../assets/json/books.json") //path to the file with json data
+fetch("../assets/json/books.json")
   .then((response) => {
     return response.json();
   })
@@ -19,9 +25,12 @@ fetch("../assets/json/books.json") //path to the file with json data
     const isItems = JSON.parse(localStorage.getItem("items"));
 
     if (!isItems?.length) {
-      localStorage.setItem("items", JSON.stringify([]));
+      let items = localStorage.setItem("items", JSON.stringify([]));
     }
+    let items = JSON.parse(localStorage.getItem("items"));
     console.info("Saving books to localstorage");
+    const list = document.querySelector(".list");
+    list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
   });
 
 const main = document.querySelector(".wrapper");
@@ -29,7 +38,7 @@ const books = JSON.parse(localStorage.getItem("books"));
 
 if (document.title === "Order confirmation") {
   function init(books) {
-  addStyles();
+    addStyles();
     header();
     checkDate();
     validateCheckbox();
@@ -38,32 +47,30 @@ if (document.title === "Order confirmation") {
     summarizeOrder();
     cart();
     addToCart();
-  footer();
-}
+    footer();
+  }
 
-init(books);
+  init(books);
 } else {
   const books = JSON.parse(localStorage.getItem("books"));
   const title = document.querySelector("title");
   title.innerHTML = "Bookshop";
 
-
   if (document.title === "Bookshop") {
     function init(books) {
-    addStyles();
-    createCard(books);
-    header();
-    cart();
-    addToCart();
-    addModalShowMore();
-    showMoreModal(books);
-    dragAndDrop();
-    footer();
+      addStyles();
+      createCard(books);
+      header();
+      cart();
+      addToCart();
+      addModalShowMore();
+      showMoreModal(books);
+      dragAndDrop();
+      footer();
+    }
+
+    init(books);
   }
-
-init(books);
 }
-}
-
 
 export { main };

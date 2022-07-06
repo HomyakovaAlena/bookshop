@@ -35,30 +35,12 @@ function addToCart() {
   function handleClick(event) {
     event.stopPropagation();
     const button = event.currentTarget;
-    const card = button.closest(".card");
-    const imgSrc = card.querySelector("img").src;
-    const headingTitle = card.querySelector(".headingTitle").textContent;
-    const headingAuthor = card.querySelector(".headingAuthor").textContent;
-    const headingPrice = card.querySelector(".headingPrice").textContent;
-
-    const item = {
-      imgsrc: `${imgSrc.replace("300", "100")}`,
-      imgalt: `${headingTitle}`,
-      title: `${headingTitle}`,
-      author: `${headingAuthor}`,
-      price: `${headingPrice}`,
-      // id: Date.now(),
-    };
-    let items = JSON.parse(localStorage.getItem("items"));
-    items.push(item);
-    list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
+    pushItem(button);
   }
-  // console.log(`There are now ${items.length} in your state`);
   list.addEventListener("click", function (e) {
     if (e.target.matches("button")) {
       console.log(e.target);
       deleteItem(e);
-      
     }
   });
 
@@ -69,14 +51,30 @@ function addToCart() {
   restoreFromLocalStorage();
 }
 
+function pushItem(button) {
+  const list = document.querySelector(".list");
+  const card = button.closest(".card");
+  const imgSrc = card.querySelector("img").src;
+  const headingTitle = card.querySelector(".headingTitle").textContent;
+  const headingAuthor = card.querySelector(".headingAuthor").textContent;
+  const headingPrice = card.querySelector(".headingPrice").textContent;
+
+  const item = {
+    imgsrc: `${imgSrc.replace("300", "100")}`,
+    imgalt: `${headingTitle}`,
+    title: `${headingTitle}`,
+    author: `${headingAuthor}`,
+    price: `${headingPrice}`,
+    // id: Date.now(),
+  };
+  let items = JSON.parse(localStorage.getItem("items"));
+  items.push(item);
+  list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
+}
+
 function displayItems(event) {
-  let items = event.detail;
+  let items = JSON.parse(localStorage.getItem("items"));
   items = removeDuplicates(event);
-  console.log(items);
-
-  console.log("yohoho");
-
-  console.log(items);
   const list = document.querySelector(".list");
 
   const html = items
@@ -95,17 +93,14 @@ function displayItems(event) {
                   item.author,
                   item.price,
                   item.imgsrc
-                )}</h3>
+                )}    x</h3>
                 <h3 class='divBookPrice'>${item.price}</h3>
                 <button type="button" aria-label="Remove ${
                   item.title
                 }" id="closeBtn" class="btn closeBtn">x</button></li>`
     )
     .join("");
-
   list.innerHTML = html;
-
-  
 }
 
 function countBooks(event, title, author, price, imgsrc) {
@@ -117,8 +112,6 @@ function countBooks(event, title, author, price, imgsrc) {
       item.price === price &&
       item.imgsrc === imgsrc
   );
-  console.log(thisBooks.length);
-  console.log(thisBooks);
   return thisBooks.length;
 }
 
@@ -128,13 +121,12 @@ function removeDuplicates(event) {
   let result = [];
 
   items.forEach((item) => {
-    // delete item.id;
     if (!set.has(JSON.stringify(item))) {
-    set.add(JSON.stringify(item));
-    result.push(item);
+      set.add(JSON.stringify(item));
+      result.push(item);
     }
   });
-  return result
+  return result;
 }
 
 function displayTotal(event) {
@@ -192,7 +184,7 @@ function restoreFromLocalStorage() {
 function deleteItem(e) {
   const button = e.target;
   console.log(button);
-  const book = e.target.closest('.booksInCart');
+  const book = e.target.closest(".booksInCart");
   console.log(book);
   const imgsrc = book.childNodes[1].src;
   const list = document.querySelector(".list");
@@ -209,4 +201,5 @@ export {
   displayItems,
   displayTotal,
   addToCart,
+  pushItem,
 };

@@ -163,7 +163,8 @@ body {
 }
 
 .headingCart {
-  width: 170px;
+  width: 130px;
+  text-align: left;
 }
 
 .confirmOrderBtn {
