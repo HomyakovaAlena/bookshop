@@ -48,9 +48,13 @@ function showMoreModal(books) {
     </div>
   </div>`;
     modalOuter.classList.add("open");
+    const body = document.querySelector("body");
+    body.style.overflow = "hidden";
 
     function closeModal() {
       modalOuter.classList.remove("open");
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
     }
 
     const closeBtn = modalInner.querySelector(".closeBtn");
