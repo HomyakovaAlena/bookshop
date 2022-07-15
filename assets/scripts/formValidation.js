@@ -13,8 +13,6 @@ function checkDate() {
   tomorrow = yyyy + "-" + mm + "-" + dd;
   let dateField = document.getElementById("dateField");
   document.getElementById("dateField").min = tomorrow;
-  console.log(dateField.checkValidity(), dateField.value < tomorrow);
-  console.log(dateField);
   dateField.addEventListener("change", function () {
     if (dateField.value < tomorrow) {
       dateField.setCustomValidity(
