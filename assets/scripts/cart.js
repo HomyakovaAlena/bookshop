@@ -1,6 +1,7 @@
 import { create, main } from "./aggregate.js";
 
 function cart() {
+  const main = document.querySelector(".wrapper");
   const fragment = document.createDocumentFragment();
   const cartField = create("div", "cartField", fragment, "");
   cartField.id = "cartField";
@@ -21,6 +22,8 @@ function cart() {
 
   main.append(fragment);
 }
+
+
 
 function addToCart() {
   const buttonsAdd = document.querySelectorAll(".btnAdd");
