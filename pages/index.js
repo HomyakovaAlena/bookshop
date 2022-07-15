@@ -15,29 +15,36 @@ import {
   summarizeOrder,
 } from "../assets/scripts/aggregate.js";
 
-fetch("../assets/json/books.json")
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    localStorage.setItem("books", JSON.stringify(data));
+async function getData() {
+  await fetch("../assets/json/books.json")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      localStorage.setItem("books", JSON.stringify(data));
 
-    const isItems = JSON.parse(localStorage.getItem("items"));
+      const isItems = JSON.parse(localStorage.getItem("items"));
+      const isbooks = JSON.parse(localStorage.getItem("books"));
 
-    if (!isItems?.length) {
-      let items = localStorage.setItem("items", JSON.stringify([]));
-    }
-    let items = JSON.parse(localStorage.getItem("items"));
-    console.info("Saving books to localstorage");
-    const list = document.querySelector(".list");
-    list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
-  });
+      if (!isItems?.length) {
+        let items = localStorage.setItem("items", JSON.stringify([]));
+      }
+
+      if (!isbooks?.length) {
+        let books = localStorage.setItem("books", JSON.stringify([]));
+      }
+
+      console.info("Saving books to localstorage");
+    });
+}
 
 const main = document.querySelector(".wrapper");
 const books = JSON.parse(localStorage.getItem("books"));
 
 if (document.title === "Order confirmation") {
-  function init(books) {
+  async function init(books) {
+    await getData();
+    books = JSON.parse(localStorage.getItem("books"));
     addStyles();
     header();
     checkDate();
@@ -52,25 +59,30 @@ if (document.title === "Order confirmation") {
 
   init(books);
 } else {
-  const books = JSON.parse(localStorage.getItem("books"));
   const title = document.querySelector("title");
   title.innerHTML = "Bookshop";
+  async function init(books) {
+    addStyles();
+    header();
+    await getData();
+    books = JSON.parse(localStorage.getItem("books"));
+    console.log(books);
+    await createCard(books);
 
-  if (document.title === "Bookshop") {
-    function init(books) {
-      addStyles();
-      createCard(books);
-      header();
-      cart();
-      addToCart();
-      addModalShowMore();
-      showMoreModal(books);
-      dragAndDrop();
-      footer();
-    }
+    let items = JSON.parse(localStorage.getItem("items"));
+    cart();
+    addToCart();
 
-    init(books);
+    const list = document.querySelector(".list");
+    list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
+
+    addModalShowMore();
+    showMoreModal(books);
+    dragAndDrop();
+    footer();
   }
+
+  init(books);
 }
 
 export { main };
