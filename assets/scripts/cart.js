@@ -39,7 +39,6 @@ function addToCart() {
   }
   list.addEventListener("click", function (e) {
     if (e.target.matches("button")) {
-      console.log(e.target);
       deleteItem(e);
     }
   });
@@ -137,7 +136,6 @@ function displayTotal(event) {
     (previousValue, currentValue) => previousValue + currentValue,
     0
   );
-  console.log(totalPrice);
   const html = `<h4 class='divBookPrice'>Total</h4>
                 <h3 class='divBookPrice'>${totalPrice}$</h3>`;
   total.innerHTML = html;
@@ -146,17 +144,13 @@ function displayTotal(event) {
 function disableConfirmBtn(event) {
   event.stopImmediatePropagation();
   const confirmOrder = document.querySelector(".confirmOrderBtn");
-  console.log(confirmOrder);
   let items = event.detail;
-  console.log("hello");
   if (confirmOrder) {
     if (items.length === 0) {
-      console.log("items.length=", items.length);
       this.style.fontSize = "14px";
       this.textContent = "Your cart is empty!";
       confirmOrder.style.visibility = "hidden";
     } else {
-      console.log("items.length if it is=", items.length);
       this.style.fontSize = "12px";
       confirmOrder.style.visibility = "visible";
     }
@@ -183,9 +177,7 @@ function restoreFromLocalStorage() {
 
 function deleteItem(e) {
   const button = e.target;
-  console.log(button);
   const book = e.target.closest(".booksInCart");
-  console.log(book);
   const imgsrc = book.childNodes[1].src;
   const list = document.querySelector(".list");
   let items = JSON.parse(localStorage.getItem("items"));
