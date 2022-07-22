@@ -1,17 +1,14 @@
 function checkDate() {
-  let tomorrow = new Date();
-  let dd = tomorrow.getDate() + 1;
-  let mm = tomorrow.getMonth() + 1;
-  let yyyy = tomorrow.getFullYear();
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
+  const today = new Date();
+  let tomorrowDay = today.getDate() + 1;
+  let tomorrowMonth = today.getMonth() + 1;
+  let tomorrowYear = today.getFullYear();
 
-  tomorrow = yyyy + "-" + mm + "-" + dd;
-  let dateField = document.getElementById("dateField");
+  tomorrowDay = correctDate(tomorrowDay);
+  tomorrowMonth = correctDate(tomorrowMonth);
+
+  const tomorrow = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+  const dateField = document.getElementById("dateField");
   document.getElementById("dateField").min = tomorrow;
   dateField.addEventListener("change", function () {
     if (dateField.value < tomorrow) {
@@ -24,17 +21,24 @@ function checkDate() {
   });
 }
 
+function correctDate(period) {
+  period < 10 ? (period = "0" + period) : period;
+  return period;
+}
+
 function validateCheckbox() {
-  const checkbox = document.querySelectorAll(".single-checkbox");
-  const max = 2;
-  for (let i = 0; i < checkbox.length; i++) {
-    checkbox[i].onclick = selectiveCheck;
-    function selectiveCheck() {
-      const checkedChecks = document.querySelectorAll(
-        ".single-checkbox:checked"
-      );
-      if (checkedChecks.length >= max + 1) return false;
-    }
+  const checkboxes = document.querySelectorAll(".single-checkbox");
+  checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("click", selectiveCheck)
+  );
+}
+
+function selectiveCheck(event) {
+  const maxChecked = 2;
+  const checkedChecks = document.querySelectorAll(".single-checkbox:checked");
+  if (checkedChecks.length > maxChecked) {
+    event.preventDefault();
+    return false;
   }
 }
 
@@ -46,7 +50,7 @@ function changeSubmitBtn() {
   form.addEventListener("change", enableCompleteBtn);
 
   function enableCompleteBtn() {
-    if (form.checkValidity() === true) {
+    if (form.checkValidity()) {
       submit.removeAttribute("disabled");
     } else {
       submit.setAttribute("disabled", "disabled");
@@ -55,23 +59,27 @@ function changeSubmitBtn() {
 }
 
 function checkValidityInputs() {
-  const inputs = document.querySelectorAll('input:not([type="submit"])');
-  inputs.forEach((input) => {
-    input.addEventListener("blur", () => {
-      if (input.checkValidity() === true) {
-        input.classList.add("valid");
-        input.classList.remove("invalid");
-      } else {
-        input.classList.add("invalid");
-        input.classList.remove("valid");
+  const form = document.querySelector(".form");
+  form.addEventListener(
+    "blur",
+    (e) => {
+      const input = e.target;
+      if (input.matches(".inputfield")) {
+        if (input.checkValidity()) {
+          input.classList.add("valid");
+          input.classList.remove("invalid");
+        } else {
+          input.classList.add("invalid");
+          input.classList.remove("valid");
+        }
       }
-    });
-  });
+    },
+    true
+  );
 }
 
 function summarizeOrder() {
   const submit = document.getElementById("submitBtn");
-  let cartField = document.getElementById("cartField");
   const street = document.getElementById("street");
   const name = document.getElementById("name");
   const surname = document.getElementById("surname");

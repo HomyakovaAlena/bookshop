@@ -1,9 +1,15 @@
-import { create, main, addToCart } from "./aggregate.js";
+import { createElement, appendElement, main } from "./aggregate.js";
 
 function addModalShowMore() {
   const fragment = document.createDocumentFragment();
-  const modalOuter = create("div", "modal-outer", fragment, "");
-  const modalInner = create("div", "modal-inner", modalOuter, "");
+  const modalOuter = appendElement(
+    createElement("div", "modal-outer"),
+    fragment
+  );
+  const modalInner = appendElement(
+    createElement("div", "modal-inner"),
+    modalOuter
+  );
   main.append(fragment);
 }
 
@@ -25,12 +31,13 @@ function showMoreModal(books) {
     const card = button.closest(".card");
     const imgSrc = card.querySelector("img").src;
     const headingTitle = card.querySelector(".headingTitle").textContent;
-    const headingAuthor = card.querySelector(".headingAuthor").textContent;
-    const headingPrice = card.querySelector(".headingPrice").textContent;
+
     event.stopImmediatePropagation();
     const book = books.filter((item) => item.title === headingTitle);
-    card.dataset.description = book[0].description;
-    const desc = card.dataset.description;
+    const desc = book[0].description;
+    const headingAuthor = book[0].author;
+    const headingPrice = book[0].price;
+
     modalInner.innerHTML = `
   <button type="button" id="closeBtn" class="btn closeBtn">x</button>
   <div class='modalRow'>
@@ -43,7 +50,7 @@ function showMoreModal(books) {
     <div class='modalCol2'>
         <h4 class='headingTitle'>${headingTitle}</h4>
         <h4 class='headingAuthor'>${headingAuthor}</h4>
-        <h3 class='divBookPrice'>${headingPrice}</h3><br><br>
+        <h3 class='divBookPrice'>$${headingPrice}</h3><br><br>
         <h4>${desc}</h4>
     </div>
   </div>`;
@@ -69,7 +76,6 @@ function showMoreModal(books) {
       }
 
       window.addEventListener("keydown", (event) => {
-        console.log(event);
         if (event.key === "Escape") {
           closeModal();
         }

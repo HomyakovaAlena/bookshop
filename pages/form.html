@@ -30,6 +30,7 @@
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
                 <input
+                  class="inputfield inputleft"
                   type="text"
                   id="name"
                   name="name"
@@ -47,6 +48,7 @@
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
                 <input
+                  class="inputfield inputleft"
                   type="text"
                   id="surname"
                   name="surname"
@@ -67,7 +69,12 @@
                   <span>Delivery date:</span>
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
-                <input type="date" id="dateField" required />
+                <input
+                  class="inputfield inputleft"
+                  type="date"
+                  id="dateField"
+                  required
+                />
                 <span class="validity"></span>
               </div>
               <div>
@@ -77,6 +84,7 @@
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
                 <input
+                  class="inputfield inputleft"
                   type="text"
                   id="street"
                   name="street"
@@ -94,6 +102,7 @@
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
                 <input
+                  class="inputfield inputleft"
                   type="text"
                   inputmode="numeric"
                   pattern="[0-9]+"
@@ -112,6 +121,7 @@
                   <strong><abbr title="required">*</abbr></strong>
                 </label>
                 <input
+                  class="inputfield inputleft"
                   type="text"
                   inputmode="numeric"
                   pattern="([1-9]|[1-9][0-9-\/]+)"
@@ -133,7 +143,7 @@
                 >Pack as a gift
                 <input
                   type="checkbox"
-                  class="single-checkbox"
+                  class="single-checkbox inputfield inputright"
                   id="pack"
                   name="gift"
                   value="pack"
@@ -144,7 +154,7 @@
                 >Add postcard
                 <input
                   type="checkbox"
-                  class="single-checkbox"
+                  class="single-checkbox inputfield inputright"
                   id="postcard"
                   name="gift"
                   value="postcard"
@@ -155,7 +165,7 @@
                 >Provide 2% discount to the next time
                 <input
                   type="checkbox"
-                  class="single-checkbox"
+                  class="single-checkbox inputfield inputright"
                   id="discount"
                   name="gift"
                   value="discount"
@@ -166,7 +176,7 @@
                 >Branded pen
                 <input
                   type="checkbox"
-                  class="single-checkbox"
+                  class="single-checkbox inputfield inputright"
                   id="pen"
                   name="gift"
                   value="pen"
@@ -183,6 +193,7 @@
               <label for="bycash" class="contain1"
                 >Cash
                 <input
+                  class="inputfield inputright"
                   type="radio"
                   id="bycash"
                   name="payment"
@@ -195,6 +206,7 @@
               <label for="bycard" class="contain1"
                 >Card
                 <input
+                  class="inputfield inputright"
                   type="radio"
                   id="bycard"
                   name="payment"

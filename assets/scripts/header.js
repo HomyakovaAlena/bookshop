@@ -1,26 +1,33 @@
-import { create, main } from "./aggregate.js";
+import { createElement, appendElement, main } from "./aggregate.js";
 
 function header() {
   const fragment = document.createDocumentFragment();
-  const header = create("header", "header", fragment);
+  const header = appendElement(createElement("header", "header"), fragment);
   header.id = "header";
-  const headerRow = create("div", "headerRow", header);
-  const wrapperHeader = create("div", "wrapperHeader", headerRow);
+  const headerRow = appendElement(createElement("div", "headerRow"), header);
+  const wrapperHeader = appendElement(
+    createElement("div", "wrapperHeader"),
+    headerRow
+  );
 
-  const link = create("a", "linkLogoHeader", wrapperHeader);
+  const link = appendElement(
+    createElement("a", "linkLogoHeader"),
+    wrapperHeader
+  );
 
   link.href = "index.html";
-  const logoOwl = create("img", "logoOwl", link);
+  const logoOwl = appendElement(createElement("img", "logoOwl"), link);
   logoOwl.src = "../assets/icons/owl.png";
   logoOwl.alt = "Wise Owl Bookshop";
   logoOwl.id = "owl";
-  const logoDiv = create("div", "logoDiv", link);
-  const title = create("h1", "title", logoDiv, "Wise Owl Bookshop");
-  const subtitle = create(
-    "h6",
-    "subtitle",
-    logoDiv,
-    "Amazing Bookshop with home delivery"
+  const logoDiv = appendElement(createElement("div", "logoDiv"), link);
+  const title = appendElement(
+    createElement("h1", "title", "Wise Owl Bookshop"),
+    logoDiv
+  );
+  const subtitle = appendElement(
+    createElement("h6", "subtitle", "Amazing Bookshop with home delivery"),
+    logoDiv
   );
   main.before(fragment);
 }

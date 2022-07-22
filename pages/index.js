@@ -2,7 +2,7 @@ import {
   addStyles,
   header,
   createCard,
-  cart,
+  renderCart,
   addToCart,
   addModalShowMore,
   showMoreModal,
@@ -15,36 +15,24 @@ import {
   summarizeOrder,
 } from "../assets/scripts/aggregate.js";
 
+let books;
+const main = document.querySelector(".wrapper");
+
 async function getData() {
-  await fetch("../assets/json/books.json")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      localStorage.setItem("books", JSON.stringify(data));
-
-      const isItems = JSON.parse(localStorage.getItem("items"));
-      const isbooks = JSON.parse(localStorage.getItem("books"));
-
-      if (!isItems?.length) {
-        let items = localStorage.setItem("items", JSON.stringify([]));
-      }
-
-      if (!isbooks?.length) {
-        let books = localStorage.setItem("books", JSON.stringify([]));
-      }
-
-      console.info("Saving books to localstorage");
-    });
+  const res = await fetch("../assets/json/books.json");
+  const data = await res.json();
+  books = data;
 }
 
-const main = document.querySelector(".wrapper");
-const books = JSON.parse(localStorage.getItem("books"));
+function setItemsToLocalStorage() {
+  const booksInStorage = JSON.parse(localStorage.getItem("items"));
+  if (!booksInStorage?.length) {
+    const items = localStorage.setItem("items", JSON.stringify([]));
+  }
+}
 
-if (document.title === "Order confirmation") {
-  async function init(books) {
-    await getData();
-    books = JSON.parse(localStorage.getItem("books"));
+async function init() {
+  if (document.title === "Order confirmation") {
     addStyles();
     header();
     checkDate();
@@ -52,37 +40,30 @@ if (document.title === "Order confirmation") {
     changeSubmitBtn();
     checkValidityInputs();
     summarizeOrder();
-    cart();
-    addToCart();
+    renderCart();
+    const list = document.querySelector(".list");
+    addToCart(list);
     footer();
-  }
-
-  init(books);
-} else {
-  const title = document.querySelector("title");
-  title.innerHTML = "Bookshop";
-  async function init(books) {
+  } else {
+    const title = document.querySelector("title");
+    title.innerHTML = "Bookshop";
     addStyles();
     header();
     await getData();
-    books = JSON.parse(localStorage.getItem("books"));
-    console.log(books);
-    await createCard(books);
-
-    let items = JSON.parse(localStorage.getItem("items"));
-    cart();
-    addToCart();
-
+    setItemsToLocalStorage();
+    createCard(books);
+    const items = JSON.parse(localStorage.getItem("items"));
+    renderCart();
     const list = document.querySelector(".list");
+    addToCart(list);
     list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
-
     addModalShowMore();
     showMoreModal(books);
     dragAndDrop();
     footer();
   }
-
-  init(books);
 }
+
+init(books);
 
 export { main };

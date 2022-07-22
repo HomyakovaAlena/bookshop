@@ -1,45 +1,52 @@
-import { create, main } from "./aggregate.js";
+import { createElement, appendElement } from "./aggregate.js";
 
 function createCard(books) {
   const fragment = document.createDocumentFragment();
-  const container = create("div", "container", fragment);
+  const container = appendElement(createElement("div", "container"), fragment);
 
-  for (let i = 0; i < books.length; i++) {
-    const card = create("div", "card", container);
-    const link = create("a", "link", card);
-    const figure = create("figure", "figureBook", link);
-    const img = create("img", "imgBook", figure);
-    img.src = books[i].imageLink;
-    img.alt = books[i].title;
+  books.forEach((book) => {
+    const card = appendElement(createElement("div", "card"), container);
+    const link = appendElement(createElement("a", "link"), card);
+    const figure = appendElement(createElement("figure", "figureBook"), link);
+    const img = appendElement(createElement("img", "imgBook"), figure);
+    img.src = book.imageLink;
+    img.alt = book.title;
     img.draggable = true;
-    const divBookRow = create("div", "divBookRow", figure);
-    const divBookHeadings = create("div", "divBookHeadings", divBookRow);
-    const headingTitle = create(
-      "h4",
-      "headingTitle",
-      divBookHeadings,
-      books[i].title
+    const divBookRow = appendElement(
+      createElement("div", "divBookRow"),
+      figure
     );
-    const headingAuthor = create(
-      "h4",
-      "headingAuthor",
-      divBookHeadings,
-      books[i].author
+    const divBookHeadings = appendElement(
+      createElement("div", "divBookHeadings"),
+      divBookRow
     );
-    const divBuy = create("div", "divBuy", divBookRow);
-
-    const divBookPrice = create("div", "divBookPrice", divBuy);
-    const headingPrice = create(
-      "h3",
-      "headingPrice",
-      divBookPrice,
-      books[i].price + "$"
+    const headingTitle = appendElement(
+      createElement("h4", "headingTitle", book.title),
+      divBookHeadings
     );
-    const buttonAdd = create("button", "btnAdd", divBuy, "+");
-    buttonAdd.classList.add("btn");
-    const buttonShowMore = create("button", "btnShowMore", card, "Show more");
-    buttonShowMore.classList.add("btn");
-  }
+    const headingAuthor = appendElement(
+      createElement("h4", "headingAuthor", book.author),
+      divBookHeadings
+    );
+    const divBuy = appendElement(createElement("div", "divBuy"), divBookRow);
+    const divBookPrice = appendElement(
+      createElement("div", "divBookPrice"),
+      divBuy
+    );
+    const headingPrice = appendElement(
+      createElement("h3", "headingPrice", book.price + "$"),
+      divBookPrice
+    );
+    const buttonAdd = appendElement(
+      createElement("button", ["btnAdd", "btn"], "+"),
+      divBuy
+    );
+    const buttonShowMore = appendElement(
+      createElement("button", ["btnShowMore", "btn"], "Show more"),
+      card
+    );
+  });
+  const main = document.querySelector(".wrapper");
   main.append(fragment);
 }
 

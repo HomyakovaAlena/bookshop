@@ -1,33 +1,30 @@
-import { pushItem } from "./aggregate.js";
+import { pushItemToCart } from "./aggregate.js";
 
 function dragAndDrop() {
   let dragObj = "";
   const dragImgs = document.querySelectorAll(".imgBook");
   const cartField = document.querySelector(".cartField");
-  const list = document.querySelector(".list");
 
   function handleDragStart(event) {
     event.stopImmediatePropagation();
-    this.style.opacity = "0.4";
+    this.classList.add("low-opacity");
+
     dragObj = event.target;
-    let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-    elemBelow.style.cursor = "move";
+    const elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+    elemBelow.classList.add("cursor-move");
   }
 
   function handleDragOver(event) {
-    console.log("dragOver");
     event.preventDefault();
   }
 
   function handleDragEnter(event) {
     event.preventDefault();
-    console.log("dragEnter");
     this.classList.add("active");
   }
 
   function handleDragLeave(event) {
     event.preventDefault();
-    console.log("dragLeave");
     const isOutside = !event.target.closest(".cartField");
     if (isOutside) {
       this.classList.remove("active");
@@ -36,8 +33,7 @@ function dragAndDrop() {
 
   function handleDragEnd(event) {
     event.preventDefault();
-    console.log("dragEnd");
-    this.style.opacity = "1.0";
+    this.classList.remove("low-opacity");
   }
 
   function handleDrop(event) {
@@ -45,9 +41,9 @@ function dragAndDrop() {
     event.stopPropagation();
     if (!dragObj) {
       cartField.classList.remove("active");
-      return false
+      return false;
     }
-    pushItem(dragObj);
+    pushItemToCart(dragObj);
     dragObj = "";
     cartField.classList.remove("active");
   }
@@ -62,9 +58,8 @@ function dragAndDrop() {
     dragImg.addEventListener("dragend", handleDragEnd)
   );
   cartField.addEventListener("drop", (event) => {
-    handleDrop(event)
+    handleDrop(event);
   });
-
 }
 
 export { dragAndDrop };

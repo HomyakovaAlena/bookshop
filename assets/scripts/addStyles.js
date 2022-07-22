@@ -1,6 +1,6 @@
 function addStyles() {
-    const fragment = document.createDocumentFragment();
-    const head = document.querySelector("head");
+  const fragment = document.createDocumentFragment();
+  const head = document.querySelector("head");
   const styles = document.createElement("link");
   const fonts = document.createElement("link");
   const stylesNormalize = document.createElement("link");

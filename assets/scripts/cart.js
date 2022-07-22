@@ -1,59 +1,31 @@
-import { create, main } from "./aggregate.js";
-
-function cart() {
-  const main = document.querySelector(".wrapper");
-  const fragment = document.createDocumentFragment();
-  const cartField = create("div", "cartField", fragment, "");
-  cartField.id = "cartField";
-  cartField.classList.add("droppable");
-  const list = create("ul", "list", cartField);
-  const total = create("div", "liRow", cartField);
-  total.classList.add("total");
-  if (document.title === "Bookshop") {
-    const confirmOrder = create(
-      "a",
-      "confirmOrderBtn",
-      cartField,
-      "Confirm order"
-    );
-    confirmOrder.classList.add("btn");
-    confirmOrder.href = "form.html";
-  }
-
-  main.append(fragment);
-}
-
-
-
-function addToCart() {
-  const buttonsAdd = document.querySelectorAll(".btnAdd");
-  const list = document.querySelector(".list");
-
-  buttonsAdd.forEach((button) =>
-    button.addEventListener("click", (event) => {
-      handleClick(event);
-    })
+function addToCart(list) {
+  const container = document.querySelector(".container");
+  container?.addEventListener(
+    "click",
+    (event) => {
+      const button = event.target;
+      if (button.matches(".btnAdd")) {
+        event.stopPropagation();
+        pushItemToCart(button);
+      }
+    },
+    true
   );
-
-  function handleClick(event) {
-    event.stopPropagation();
-    const button = event.currentTarget;
-    pushItem(button);
-  }
   list.addEventListener("click", function (e) {
     if (e.target.matches("button")) {
       deleteItem(e);
     }
   });
-
-  list.addEventListener("itemsUpdated", mirrorToLocalStorage);
-  list.addEventListener("itemsUpdated", displayItems);
-  list.addEventListener("itemsUpdated", displayTotal);
-  list.addEventListener("itemsUpdated", disableConfirmBtn);
+  list.addEventListener("itemsUpdated", (event) => {
+    mirrorToLocalStorage(event);
+    displayItems(event);
+    displayTotal(event);
+    disableConfirmBtn(event);
+  });
   restoreFromLocalStorage();
 }
 
-function pushItem(button) {
+function pushItemToCart(button) {
   const list = document.querySelector(".list");
   const card = button.closest(".card");
   const imgSrc = card.querySelector("img").src;
@@ -67,18 +39,15 @@ function pushItem(button) {
     title: `${headingTitle}`,
     author: `${headingAuthor}`,
     price: `${headingPrice}`,
-    // id: Date.now(),
   };
-  let items = JSON.parse(localStorage.getItem("items"));
+  const items = JSON.parse(localStorage.getItem("items"));
   items.push(item);
   list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
 }
 
 function displayItems(event) {
-  let items = JSON.parse(localStorage.getItem("items"));
-  items = removeDuplicates(event);
-  const list = document.querySelector(".list");
-
+  const items = removeDuplicates(event);
+  const list = event.currentTarget;
   const html = items
     .map(
       (item) => `<li class='liRow booksInCart'>
@@ -118,13 +87,13 @@ function countBooks(event, title, author, price, imgsrc) {
 }
 
 function removeDuplicates(event) {
-  let items = event.detail;
-  let set = new Set();
-  let result = [];
-
+  const items = event.detail;
+  const set = new Set();
+  const result = [];
   items.forEach((item) => {
-    if (!set.has(JSON.stringify(item))) {
-      set.add(JSON.stringify(item));
+    const itemString = JSON.stringify(item);
+    if (!set.has(itemString)) {
+      set.add(itemString);
       result.push(item);
     }
   });
@@ -132,10 +101,10 @@ function removeDuplicates(event) {
 }
 
 function displayTotal(event) {
-  let items = event.detail;
-  let prices = items.map((item) => parseInt(item.price));
+  const items = event.detail;
+  const prices = items.map((item) => parseInt(item.price));
   const total = document.querySelector(".total");
-  let totalPrice = prices.reduce(
+  const totalPrice = prices.reduce(
     (previousValue, currentValue) => previousValue + currentValue,
     0
   );
@@ -147,54 +116,50 @@ function displayTotal(event) {
 function disableConfirmBtn(event) {
   event.stopImmediatePropagation();
   const confirmOrder = document.querySelector(".confirmOrderBtn");
-  let items = event.detail;
+  const items = event.detail;
+  const list = event.currentTarget;
   if (confirmOrder) {
     if (items.length === 0) {
-      this.style.fontSize = "14px";
-      this.textContent = "Your cart is empty!";
+      list.classList.add("font-enlarge");
+      list.textContent = "Your cart is empty!";
       confirmOrder.style.visibility = "hidden";
     } else {
-      this.style.fontSize = "12px";
+      list.classList.remove("font-enlarge");
       confirmOrder.style.visibility = "visible";
     }
   }
 }
 
 function mirrorToLocalStorage(event) {
-  let items = event.detail || [];
+  const items = event.detail || [];
   localStorage.setItem("items", JSON.stringify(items));
-  console.info("Saving items to localstorage");
-  console.log(items);
 }
 
 function restoreFromLocalStorage() {
-  console.log("Restoring from localstorage");
   const list = document.querySelector(".list");
-  const isItems = JSON.parse(localStorage.getItem("items"));
-  let items = [];
-  if (isItems?.length) {
-    items.push(...isItems);
+  const booksInStorage = JSON.parse(localStorage.getItem("items"));
+  const items = [];
+  if (booksInStorage?.length) {
+    items.push(...booksInStorage);
     list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
   }
 }
 
 function deleteItem(e) {
-  const button = e.target;
   const book = e.target.closest(".booksInCart");
-  const imgsrc = book.childNodes[1].src;
+  const imgsrc = book.querySelector("img").src;
   const list = document.querySelector(".list");
-  let items = JSON.parse(localStorage.getItem("items"));
-  items = items.filter((item) => item.imgsrc !== imgsrc);
+  const booksInStorage = JSON.parse(localStorage.getItem("items"));
+  const items = booksInStorage.filter((item) => item.imgsrc !== imgsrc);
   list.dispatchEvent(new CustomEvent("itemsUpdated", { detail: items }));
 }
 
 export {
-  cart,
   deleteItem,
   restoreFromLocalStorage,
   mirrorToLocalStorage,
   displayItems,
   displayTotal,
   addToCart,
-  pushItem,
+  pushItemToCart,
 };
