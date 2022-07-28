@@ -1,26 +1,25 @@
 :root {
-    --black: #000000;
-    --jet: #858585;
-    --platinum: #E5E5E5;
-    --blue: #14213D;
-    --orange: #FCA311;
-    --brick: #b3492d;
-    --white: #FFFFFF;
+  --black: #000000;
+  --jet: #858585;
+  --lightSea: #1a5d5442;
+  --sea: #1a5d54;
+  --orange: #fca311;
+  --brick: #b3492d;
+  --white: #ffffff;
 }
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 a,
 a:visited,
 a:hover {
-    
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:focus,
 a:active {
-    outline: none;
+  outline: none;
 }
 
 h1,
@@ -31,271 +30,615 @@ h5,
 h6,
 p,
 button {
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    margin: 0px;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0px;
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
-    font-size: 13px;
-    font-weight: normal;
-    font-style: normal;
-    color: var(--jet);
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  color: var(--jet);
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 1400px;
-    margin: 110px auto 0;
-    padding-left: 0px;
-    padding-right: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1400px;
+  margin: 110px auto 0;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .container {
-    max-width: 1000px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 15px;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .headerRow {
-    background-color: var(--blue);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    position: sticky;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
+  background-color: var(--sea);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .wrapperHeader {
-    width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .logoOwl {
-    height: 80px;
+  height: 80px;
 }
 
 .title {
-    font-family: "Montserrat", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--orange);
-    line-height: 125%;
-    margin-top: 15px;
-    padding-left: 5px;   
-    letter-spacing: 0.06em;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--orange);
+  line-height: 125%;
+  margin-top: 15px;
+  padding-left: 5px;
+  letter-spacing: 0.06em;
 }
 
 .title:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .subtitle {
-    font-family: "Montserrat", sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--white);
-    line-height: 125%;
-    letter-spacing: 0.06em;
-    padding-left: 10px;
-    padding-right: 15px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--white);
+  line-height: 125%;
+  letter-spacing: 0.06em;
+  padding-left: 10px;
+  padding-right: 15px;
 }
 
 .linkLogoHeader {
-    display: flex;
-    flex-direction: row;
-}
-
-
-#cart {
-    color: var(--platinum);
-    font-size: 36px;
-    display: block;
-    margin-top: 20px;
-}
-
-#cart:hover .cartField {
-    background-color: var(--platinum);
-    color: var(--jet);
-    box-shadow: 0px 2px 10px 3px var(--jet);
-    cursor: pointer;
-    transition-duration: 0.3s;
+  display: flex;
+  flex-direction: row;
 }
 
 .cartField {
-    background-color: var(--white);
-    width: 400px;
-    height: 400px;
-    margin-top: 20px;
-    color: var(--platinum);
-    text-align: center;
-    padding-top: 30px;
-    font-size: 24px;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: 0.06em;
-    position: sticky;
-    top: 130px;
+  background-color: var(--white);
+  width: 350px;
+  height: 420px;
+  color: var(--jet);
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  position: sticky;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+}
+
+.active {
+  background-color: var(--lightSea);
 }
 
 .cartField:hover {
-    color: var(--jet);
-    box-shadow: 0px 2px 20px 3px var(--platinum);
-    cursor: pointer;
-    transition-duration: 0.3s;
+  color: var(--jet);
+  box-shadow: 0px 2px 20px 3px var(--lightSea);
+  transition-duration: 0.3s;
 }
 
+.cartField ul {
+  padding: 0;
+}
+
+.cartField h2 {
+  text-align: justify;
+  font-size: 15px;
+  line-height: 200%;
+}
+
+.imgBookCart {
+  width: 70px;
+}
+
+.headingCart {
+  width: 130px;
+  text-align: left;
+}
+
+.confirmOrderBtn {
+  background-color: var(--sea);
+  color: var(--white);
+  padding: 12px 0;
+  margin: 20px 0 0 0;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.confirmOrderBtn:disabled {
+  background-color: var(--jet);
+  color: var(--white);
+  opacity: 80%;
+  cursor: auto;
+}
+
+.list {
+  height: 300px;
+  width: 360px;
+  overflow: auto;
+}
+
+.liRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-between;
+  text-align: justify;
+  gap: 13px;
+  margin-bottom: 5px;
+}
 
 .card {
-    width: 300px;
-    height: 450px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    align-content: center;
-    text-align: center;
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  position: relative;
 }
 
 .card:hover {
-    box-shadow: 0px 2px 30px 10px var(--platinum);
-    cursor: pointer;
-    transition-duration: 1s;
+  box-shadow: 0px 2px 30px 10px var(--lightSea);
+  cursor: pointer;
+  transition-duration: 1s;
 }
 
 .card:hover .btnShowMore {
-    visibility: visible;
-    transition-duration: 0.3s;
+  visibility: visible;
+  transition-duration: 0.3s;
 }
 
 .imgBook {
-    height: 300px;
-    margin-top: 10px;
+  height: 300px;
+  margin-top: 10px;
+}
+
+[draggable] {
+  cursor: move;
+  user-select: none;
 }
 
 .divBookRow {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }
 
 .divBookHeadings {
-    display: inline-flex;
-    flex-direction: column;
-    text-align: justify;
-    max-width: 200px;
-    height: 55px;
-    gap: 5px;
-    font-family: "Montserrat";
-    font-size: 13px;
-    font-weight: normal;
-    font-style: normal;
-    color: var(--jet);
+  display: inline-flex;
+  flex-direction: column;
+  text-align: justify;
+  max-width: 200px;
+  height: 55px;
+  gap: 5px;
+  font-family: "Montserrat";
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  color: var(--jet);
 }
 
 .divBuy {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .divBookPrice {
-    display: flex;
-    flex-direction: column;
-    font-family: "Montserrat";
-    font-size: 15px;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--sea);
 }
 
 .btn {
-    border-radius: 10px;
-    border: none;
-    display: block-flex; 
-    justify-content: center;
-    align-items: center;
-    font-family: "Montserrat";
-    font-style: medium;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    
+  border-radius: 10px;
+  border: none;
+  display: block-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: medium;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
 }
 
 .card .btnShowMore {
-    visibility: hidden;
-    background-color: var(--blue);
-    width: 120px;
-    height: 30px;
-    color: var(--white);
+  visibility: hidden;
+  background-color: var(--sea);
+  width: 120px;
+  height: 30px;
+  color: var(--white);
 }
 
-
 .card .btnAdd {
-    width: 30px;
-    height: 30px;
-    color: var(--white);
-    background-color: var(--blue);
+  width: 30px;
+  height: 30px;
+  color: var(--white);
+  background-color: var(--sea);
 }
 
 .btn:hover {
-    background: var(--orange);
-    color: var(--black);
-    cursor: pointer;
-    transition-duration: 0.3s;
+  background: var(--orange);
+  color: var(--black);
+  cursor: pointer;
+  transition-duration: 0.3s;
 }
 
 .headingAuthor {
-    font-style: italic;
+  font-style: italic;
 }
 
 .footer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .backToTop {
-    background-color: var(--blue);
-    margin-top: 20px;
-    padding: 20px;
-    color: var(--white);
-    text-align: center;
+  background-color: var(--sea);
+  margin-top: 20px;
+  padding: 20px;
+  color: var(--white);
+  text-align: center;
 }
 
 .backToTop:hover {
-    filter: opacity(80%);
+  filter: opacity(80%);
 }
 
-
 .footerRow {
-    background-color: var(--blue);
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
+  background-color: var(--sea);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .spanFooter {
-    display: inline-block;
-    font-size: 10px;
-    color: var(--white);
-    letter-spacing: 0.1em;
-    margin: 30px;
+  display: inline-block;
+  font-size: 10px;
+  color: var(--white);
+  letter-spacing: 0.1em;
+  margin: 30px;
+}
+
+.form {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: var(--lightSea);
+  padding: 20px;
+  color: var(--black);
+  font-size: 13px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form:hover {
+  box-shadow: 0px 2px 10px 10px var(--jet);
+  transition-duration: 0.3s;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  width: 50%;
+}
+
+.fieldset {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  width: 85%;
+  padding: 20px;
+}
+
+i {
+  padding: 8px;
+}
+
+legend {
+  font-size: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  margin-top: 20px;
+  display: block;
+}
+
+#submitBtn {
+  background-color: var(--sea);
+  color: var(--white);
+  padding: 12px;
+  margin: 5px 0;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+#submitBtn:hover {
+  background: var(--orange);
+  color: var(--black);
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+#submitBtn:disabled {
+  background-color: var(--jet);
+  color: var(--white);
+  opacity: 80%;
+  cursor: auto;
+}
+
+.inputleft {
+  width: 85%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid var(--jet);
+  border-radius: 10px;
+}
+
+.inputright {
+  width: 85%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid var(--jet);
+  border-radius: 10px;
+}
+
+input + input {
+  margin-top: 1em;
+}
+
+input {
+  display: inline;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--jet);
+}
+
+.valid {
+  border: 2px solid green;
+}
+
+.invalid {
+  border: 2px solid var(--brick);
+}
+
+.col1 .invalid + span:after {
+  content: "✖ The field is invalid";
+  color: var(--brick);
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.col1 .valid + span:after {
+  content: "✓";
+  padding-left: 5px;
+}
+
+.contain {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 160%;
+}
+
+.contain input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--white);
+}
+
+.contain:hover input ~ .checkmark {
+  background-color: var(--jet);
+}
+
+.contain input:checked ~ .checkmark {
+  background-color: var(--orange);
+}
+
+.checkmark:after {
+  content: "";
+  display: none;
+}
+
+.contain input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.contain .checkmark:after {
+  margin-left: 7px;
+  left: 16px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: 1px solid var(--white);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.contain1 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 160%;
+}
+
+.contain1 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmarkradio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: var(--white);
+  border-radius: 50%;
+}
+
+.contain1:hover input ~ .checkmarkradio {
+  background-color: var(--jet);
+}
+
+.contain1 input:checked ~ .checkmarkradio {
+  background-color: var(--orange);
+}
+
+.checkmarkradio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.contain1 input:checked ~ .checkmarkradio:after {
+  display: block;
+}
+
+.contain1 .checkmarkradio:after {
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.modal-outer {
+  display: grid;
+  background: hsla(0, 0%, 30%, 0.9);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-inner {
+  max-width: 600px;
+  min-width: 400px;
+  padding: 2rem;
+  border-radius: 10px;
+  min-height: 200px;
+  background: var(--white);
+}
+
+.modal-outer.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.closeBtn {
+  float: right;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.imgBookModal {
+  margin-right: 20px;
+}
+
+.low-opacity {
+  opacity: 0.4;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.font-enlarge {
+  font-size: 14px;
+}
+
+.visually-hidden {
+  visibility: hidden important!;
 }
